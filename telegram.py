@@ -3,9 +3,10 @@ from aiogram import Bot, Dispatcher, Router
 from aiogram.types import Message
 from aiogram.filters import CommandStart
 from main import chek_news_update
+from utils import logger
 
 # Создаем бота и диспетчер
-bot = Bot(token="TOKEN")
+bot = Bot(token="7314617584:AAF0yoHEm5bfzgZ8_PoVZkJSM-UYRy1JG3Q")
 dp = Dispatcher()
 router = Router()  # Используем роутер
 
@@ -30,7 +31,7 @@ async def news_every_minute():
                     news = "\n".join(item)
                     await bot.send_message(user_id, news)
 
-        await asyncio.sleep(3600)  # Ждем 1 час
+        await asyncio.sleep(60)  # Ждем 1 час
 
 
 # Главная функция
@@ -42,4 +43,5 @@ async def main():
 
 
 if __name__ == "__main__":
+    logger.info('Bot запущен')
     asyncio.run(main())

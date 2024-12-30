@@ -2,6 +2,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 import re
+from utils import logger
 
 cookies = {
     "__ddg8_": "VXfJHnDCsUzER0vK",
@@ -106,6 +107,7 @@ def get_first_new():
 
 
 def chek_news_update():
+    logger.info('Получаю новые концерты')
     # Считываем старые данные
     try:
         with open('concerts_data.json', encoding="UTF-8") as file:
@@ -141,7 +143,7 @@ def chek_news_update():
         new_time = new_data[2]       # время
 
         # Сравниваем с данными из старого списка
-        is_new = True
+        is_new = True  # Initialize `is_new` for each new_data
         for old_data in old_concerts_data:
             # Ищем ссылку в старом массиве
             old_link = None
@@ -174,9 +176,14 @@ def chek_news_update():
             break
 
         if is_new:
+            logger.info('Найден новый концерт!')
+            logger.info(new_data)
             new_entries.append(new_data)
 
-    # Если есть новые данные, возвращаем их
+    # No need for `if is_new == False` since it's per-item logic
+    if not new_entries:
+        logger.info('Новых концертов не найдено')
+
     return new_entries
 
 
