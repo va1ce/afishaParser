@@ -31,7 +31,7 @@ async def news_every_minute():
                     news = "\n".join(item)
                     await bot.send_message(user_id, news)
 
-        await asyncio.sleep(60)  # Ждем 1 час
+        await asyncio.sleep(3600)  # Ждем 1 час
 
 
 # Главная функция
